@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Парсер JSON</title>
+</head>
+<body>
+    <h3>Парсер JSON</h3>
+    <p>Введіть JSON-рядок та натисніть «Розібрати»:</p>
+    <textarea id="input" rows="8" cols="50">{ "name": "John", "age": 30, "skills": ["js", "react"] }</textarea>
+    <br>
+    <button onclick="parse()">Розібрати</button>
+    <div id="output"></div>
+
+    <script>
+        // Рівень 2: приймаємо JSON-рядок, розбираємо його за допомогою JSON.parse()
+        // та виводимо у вигляді деревоподібної структури.
+        function render(value) {
+            const ul = document.createElement('ul');
+
+            const entries = Array.isArray(value)
+                ? value.map((item, i) => [`[${i}]`, item])
+                : Object.entries(value);
+
+            entries.forEach(([key, val]) => {
+                const li = document.createElement('li');
+                if (val !== null && typeof val === 'object') {
+                    li.textContent = `${key}:`;
+                    li.appendChild(render(val));
+                } else {
+                    li.textContent = `${key}: ${val}`;
+                }
+                ul.appendChild(li);
+            });
+
+            return ul;
+        }
+
+        function parse() {
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            try {
+                const data = JSON.parse(document.getElementById('input').value);
+                if (data !== null && typeof data === 'object') {
+                    output.appendChild(render(data));
+                } else {
+                    output.textContent = `Значення: ${data}`;
+                }
+            } catch (e) {
+                output.textContent = 'Помилка парсингу: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

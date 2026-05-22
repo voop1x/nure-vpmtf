@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/nure-hplf-main.iml" filepath="$PROJECT_DIR$/.idea/nure-hplf-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pz-1.iml" filepath="$PROJECT_DIR$/.idea/pz-1.iml" />
+    </modules>
+  </component>
+</project>

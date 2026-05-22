@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Дані про себе</title>
+</head>
+<body>
+    <h3>Інформація про мене</h3>
+    <div id="card"></div>
+
+    <script>
+        // Рівень 1: завантажуємо JSON-файл з даними про себе через fetch,
+        // розбираємо його за допомогою JSON.parse() та будуємо HTML через createElement().
+        fetch('me.json')
+            .then(response => response.text())
+            .then(text => {
+                const me = JSON.parse(text);
+                const card = document.getElementById('card');
+
+                const name = document.createElement('p');
+                name.textContent = `Ім'я: ${me.name}`;
+                card.appendChild(name);
+
+                const age = document.createElement('p');
+                age.textContent = `Вік: ${me.age}`;
+                card.appendChild(age);
+
+                const hobbiesTitle = document.createElement('p');
+                hobbiesTitle.textContent = 'Хобі:';
+                card.appendChild(hobbiesTitle);
+
+                const list = document.createElement('ul');
+                me.hobbies.forEach(hobby => {
+                    const li = document.createElement('li');
+                    li.textContent = hobby;
+                    list.appendChild(li);
+                });
+                card.appendChild(list);
+            });
+    </script>
+</body>
+</html>
